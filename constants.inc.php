@@ -3,7 +3,7 @@
 define("FILE_SETTINGS", "database.settings.txt");
 
 if (! file_exists(FILE_SETTINGS)){
-  die("Bestand " . FILE_SETTINGS . " niet gevonden. Zie README.md voor instructies.");
+  die("#ERROR => Bestand " . FILE_SETTINGS . " niet gevonden. Zie README.md voor instructies.\n");
 }
 $filecontents = file_get_contents(FILE_SETTINGS);
 $lines = explode("\n", $filecontents);
