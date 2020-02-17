@@ -11,8 +11,13 @@
 
   define ("METERSTANDEN_DATE_START", "2016-01-01");
   define ("NR_OF_METERSTANDEN", 12);
-  define ("MAX_CITIES",50);
+
+  define ("NR_OF_CITIES",5);
+
+  define ("MIN_STREETS_PER_CITY", 5);
   define ("MAX_STREETS_PER_CITY", 20);
+
+  define ("MIN_HUISNUMMERS_PER_STRAAT",10);
   define ("MAX_HUISNUMMERS_PER_STRAAT",40);
 
   echo "Performing cleanup\n.......\n";
@@ -103,21 +108,25 @@
 
   echo "Found:  $count_places places and $count_streets streets\n";
 
-  for ($nrOfCities = 0 ; $nrOfCities < MAX_CITIES; $nrOfCities++) {
+  for ($nrOfCities = 0 ; $nrOfCities < NR_OF_CITIES; $nrOfCities++) {
     $placenr = random_int(0, $count_places - 1);
     $placename = $placenames[$placenr];
     $postcode_base = random_int(1111, $count_places);
 
-    echo  "Using ($nrOfCities of ".  MAX_CITIES . ") $placename and ZIP-code $postcode_base\n";
+    $nrOfStreets  = random_int(MIN_STREETS_PER_CITY, MAX_STREETS_PER_CITY);
 
-    for ($nrOfStreets = 0; $nrOfStreets < MAX_STREETS_PER_CITY; $nrOfStreets++) {
+    echo  "Using ($nrOfCities of ".  NR_OF_CITIES . ") $placename and ZIP-code $postcode_base\n";
+    echo " - Generating $nrOfStreets streets\n";
+
+    for ($str = 0; $str < $nrOfStreets; $str++) {
 
       $streetnr = random_int(0, $count_streets - 1);
       $streetname = $streetnames[$streetnr];
 
       $postcodesize = random_int(5,20);
 
-      $nrOfHouses = random_int(5, MAX_HUISNUMMERS_PER_STRAAT);
+      $nrOfHouses = random_int(MIN_HUISNUMMERS_PER_STRAAT, MAX_HUISNUMMERS_PER_STRAAT);
+      echo "  - [$str] Generating $nrOfHouses home-addresses\n";
       for ($i = 0; $i < $nrOfHouses; $i++) {
 
         if ($i % $postcodesize == 0) {
