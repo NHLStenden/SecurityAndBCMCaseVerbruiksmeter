@@ -1,6 +1,11 @@
 <?php
 
-$filecontents = file_get_contents("database.settings.txt");
+define("FILE_SETTINGS", "database.settings.txt");
+
+if (! file_exists(FILE_SETTINGS)){
+  die("Bestand " . FILE_SETTINGS . " niet gevonden. Zie README.md voor instructies.");
+}
+$filecontents = file_get_contents(FILE_SETTINGS);
 $lines = explode("\n", $filecontents);
 
 $username = "";
