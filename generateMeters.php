@@ -46,12 +46,18 @@
   $sql_new_adres = "
       INSERT INTO tbl_adressen (
           a_plaatsnaam,
+          a_gemeente,
+          a_provincie,
+          a_regio,
           a_straatnaam,
           a_huisnummer,
           a_postcode
       )  
       VALUES (
         :plaats,
+        :gemeente,
+        :provincie,
+        :regio,
         :straat,
         :huisnr, 
         :postcode                 
@@ -100,7 +106,8 @@
   $meternr_start = 293034;
 
   $streets = file_get_contents("./datafiles/streetnames.sorted.txt");
-  $places  = file_get_contents("./datafiles/plaatsnamen.txt");
+  #$places  = file_get_contents("./datafiles/plaatsnamen.txt");
+  $places  = file_get_contents("./datafiles/plaatsen.txt");
   $streetnames = explode("\n", $streets);
   $placenames  = explode("\n", $places);
   $count_streets = count($streetnames);
@@ -110,7 +117,15 @@
 
   for ($nrOfCities = 0 ; $nrOfCities < NR_OF_CITIES; $nrOfCities++) {
     $placenr = random_int(0, $count_places - 1);
-    $placename = $placenames[$placenr];
+    $placenameRecord = $placenames[$placenr];
+
+    # Split the placename record into its parts (plaatsnaam, gemeente, provincie, regio)
+    $placenameParts = explode("|", $placenameRecord);
+    $placename = $placenameParts[0];
+    $gemeente  = $placenameParts[1];
+    $provincie = $placenameParts[2];
+    $regio     = $placenameParts[3];
+
     $postcode_base = random_int(1111, $count_places);
 
     $nrOfStreets  = random_int(MIN_STREETS_PER_CITY, MAX_STREETS_PER_CITY);
@@ -142,10 +157,13 @@
          * Nieuw adres
          */
         $values = [
-            "plaats" => $placename,
-            "straat" => $streetname,
-            "huisnr" => $i+1,
-            "postcode" => $postcode,
+            "plaats"    => $placename,
+            "gemeente"  => $gemeente,
+            "provincie" => $provincie,
+            "regio"     => $regio,
+            "straat"    => $streetname,
+            "huisnr"    => $i+1,
+            "postcode"  => $postcode,
         ];
         setParameterValues($statement_new_adres, $values);
         if (!$statement_new_adres->execute()) {

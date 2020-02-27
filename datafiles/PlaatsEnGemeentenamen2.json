@@ -1,0 +1,17 @@
+{
+  "odata.metadata":"https://opendata.cbs.nl/ODataApi/OData/83689NED/$metadata","value":[
+    {
+      "name":"TableInfos","url":"https://opendata.cbs.nl/ODataApi/OData/83689NED/TableInfos"
+    },{
+      "name":"UntypedDataSet","url":"https://opendata.cbs.nl/ODataApi/OData/83689NED/UntypedDataSet"
+    },{
+      "name":"TypedDataSet","url":"https://opendata.cbs.nl/ODataApi/OData/83689NED/TypedDataSet"
+    },{
+      "name":"DataProperties","url":"https://opendata.cbs.nl/ODataApi/OData/83689NED/DataProperties"
+    },{
+      "name":"CategoryGroups","url":"https://opendata.cbs.nl/ODataApi/OData/83689NED/CategoryGroups"
+    },{
+      "name":"Woonplaatsen","url":"https://opendata.cbs.nl/ODataApi/OData/83689NED/Woonplaatsen"
+    }
+  ]
+}

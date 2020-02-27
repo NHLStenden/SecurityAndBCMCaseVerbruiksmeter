@@ -21,11 +21,14 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `tbl_adressen` (
-                                `a_idAdres` int(11) NOT NULL,
-                                `a_plaatsnaam` varchar(80) NOT NULL,
-                                `a_straatnaam` varchar(200) NOT NULL,
-                                `a_huisnummer` varchar(16) NOT NULL,
-                                `a_postcode` varchar(12) NOT NULL
+    `a_idAdres` int(11) NOT NULL,
+    `a_plaatsnaam` varchar(80) NOT NULL,
+    `a_gemeente` varchar(80) NOT NULL,
+    `a_provincie` varchar(80) NOT NULL,
+    `a_regio` varchar(80) NOT NULL,
+    `a_straatnaam` varchar(200) NOT NULL,
+    `a_huisnummer` varchar(16) NOT NULL,
+    `a_postcode` varchar(12) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -35,10 +38,10 @@ CREATE TABLE `tbl_adressen` (
 --
 
 CREATE TABLE `tbl_klanten` (
-                               `k_idKlant` int(11) NOT NULL,
-                               `k_achternaam` varchar(100) NOT NULL,
-                               `k_voornaam` varchar(80) NOT NULL,
-                               `k_fk_idAdres` int(11) NOT NULL
+   `k_idKlant` int(11) NOT NULL,
+   `k_achternaam` varchar(100) NOT NULL,
+   `k_voornaam` varchar(80) NOT NULL,
+   `k_fk_idAdres` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Klanten en verwijzing naar adres';
 
 -- --------------------------------------------------------
@@ -48,8 +51,8 @@ CREATE TABLE `tbl_klanten` (
 --
 
 CREATE TABLE `tbl_meters` (
-                              `m_idMeter` int(11) NOT NULL,
-                              `m_fk_idAdres` int(11) NOT NULL
+  `m_idMeter` int(11) NOT NULL,
+  `m_fk_idAdres` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Meternummers en adressen';
 
 -- --------------------------------------------------------
@@ -59,13 +62,13 @@ CREATE TABLE `tbl_meters` (
 --
 
 CREATE TABLE `tbl_meters_standen` (
-                                      `ms_idMeterstand` int(11) NOT NULL,
-                                      `ms_fk_idMeter` int(11) NOT NULL,
-                                      `ms_product` varchar(1) CHARACTER SET utf8 COLLATE utf8_estonian_ci NOT NULL,
-                                      `ms_telwerk` int(11) NOT NULL,
-                                      `ms_stand` int(11) NOT NULL,
-                                      `ms_datum` date NOT NULL,
-                                      `ms_tijd` time NOT NULL
+  `ms_idMeterstand` int(11) NOT NULL,
+  `ms_fk_idMeter` int(11) NOT NULL,
+  `ms_product` varchar(1) CHARACTER SET utf8 COLLATE utf8_estonian_ci NOT NULL,
+  `ms_telwerk` int(11) NOT NULL,
+  `ms_stand` int(11) NOT NULL,
+  `ms_datum` date NOT NULL,
+  `ms_tijd` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
