@@ -77,16 +77,12 @@
       )";
   $sql_new_meterstand =  "
     INSERT INTO tbl_meters_standen (
-      ms_fk_idMeter, 
-      ms_product, 
-      ms_telwerk, 
+      ms_fk_idMeterTelwerk, 
       ms_stand, 
       ms_datum, 
       ms_tijd)
     VALUES (
-      :idMeter, 
-      :product, 
-      :telwerk, 
+      :fk_id_metertelwerk, 
       :stand, 
       date_add(:datum, INTERVAL :days DAY ), 
       :tijd
@@ -196,7 +192,7 @@
             ["product" => "E", "type" => "T", "nr" => 4, "stand" => random_int(10,5000)],  // electra, teruglevering laag
         ];
 
-        foreach ($telwerken as $telwerk) {
+        foreach ($telwerken as $key => $telwerk) {
           $values = [
               "idMeter"    => $idNewMeter,
               "product"    => $telwerk['product'],
@@ -206,8 +202,10 @@
           setParameterValues($statement_new_telwerk, $values);
           $statement_new_telwerk->execute();
 
-        }
+          // sla de nieuwe Primay Key op voor het later toevoegen van meterstanden
+          $telwerken[$key]['fk_id_metertelwerk'] = $db->lastInsertId();
 
+        }
         /**
          * Tellerstanden aan meter/telwerken toevoegen
          */
@@ -218,9 +216,7 @@
           for ($j = 0; $j < NR_OF_METERSTANDEN; $j++) {
 
             $values = [
-                "idMeter" => $idNewMeter,
-                "product" => $telwerk['product'],
-                "telwerk" => $telwerk['nr'],
+                "fk_id_metertelwerk" => $telwerk['fk_id_metertelwerk'],
                 "stand" => $stand,
                 "datum" => METERSTANDEN_DATE_START,
                 "days" => $j * 30,

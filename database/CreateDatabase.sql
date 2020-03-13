@@ -10,6 +10,12 @@
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
+DROP TABLE IF EXISTS tbl_adressen  ;
+DROP TABLE IF EXISTS tbl_klanten  ;
+DROP TABLE IF EXISTS tbl_meter_telwerken  ;
+DROP TABLE IF EXISTS tbl_meters  ;
+DROP TABLE IF EXISTS tbl_meters_standen  ;
+
 --
 -- Database: `secriskyouthenergy`
 --
@@ -21,7 +27,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `tbl_adressen` (
-    `a_idAdres` int(11) NOT NULL,
+    `a_idAdres` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `a_plaatsnaam` varchar(80) NOT NULL,
     `a_gemeente` varchar(80) NOT NULL,
     `a_provincie` varchar(80) NOT NULL,
@@ -38,7 +44,7 @@ CREATE TABLE `tbl_adressen` (
 --
 
 CREATE TABLE `tbl_klanten` (
-   `k_idKlant` int(11) NOT NULL,
+   `k_idKlant` int(11) NOT NULL PRIMARY KEY  AUTO_INCREMENT,
    `k_achternaam` varchar(100) NOT NULL,
    `k_voornaam` varchar(80) NOT NULL,
    `k_fk_idAdres` int(11) NOT NULL
@@ -51,7 +57,7 @@ CREATE TABLE `tbl_klanten` (
 --
 
 CREATE TABLE `tbl_meters` (
-  `m_idMeter` int(11) NOT NULL,
+  `m_idMeter` int(11) NOT NULL ,
   `m_fk_idAdres` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Meternummers en adressen';
 
@@ -62,10 +68,8 @@ CREATE TABLE `tbl_meters` (
 --
 
 CREATE TABLE `tbl_meters_standen` (
-  `ms_idMeterstand` int(11) NOT NULL,
-  `ms_fk_idMeter` int(11) NOT NULL,
-  `ms_product` varchar(1) CHARACTER SET utf8 COLLATE utf8_estonian_ci NOT NULL,
-  `ms_telwerk` int(11) NOT NULL,
+  `ms_idMeterstand` int(11) NOT NULL PRIMARY KEY  AUTO_INCREMENT,
+  `ms_fk_idMeterTelwerk` int(11) NOT NULL,
   `ms_stand` int(11) NOT NULL,
   `ms_datum` date NOT NULL,
   `ms_tijd` time NOT NULL
@@ -78,11 +82,11 @@ CREATE TABLE `tbl_meters_standen` (
 --
 
 CREATE TABLE `tbl_meter_telwerken` (
-                                       `mt_idMeterTelwerk` int(11) NOT NULL,
-                                       `mt_fk_idMeter` int(11) NOT NULL,
-                                       `mt_product` varchar(1) NOT NULL,
-                                       `mt_telwerk` smallint(6) NOT NULL,
-                                       `mt_type` varchar(1) NOT NULL COMMENT 'Verbruik of teruglevering'
+   `mt_idMeterTelwerk` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+   `mt_fk_idMeter` int(11) NOT NULL,
+   `mt_product` varchar(1) NOT NULL,
+   `mt_telwerk` smallint(6) NOT NULL,
+   `mt_type` varchar(1) NOT NULL COMMENT 'Verbruik of teruglevering'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -93,58 +97,29 @@ CREATE TABLE `tbl_meter_telwerken` (
 -- Indexen voor tabel `tbl_adressen`
 --
 ALTER TABLE `tbl_adressen`
-    ADD PRIMARY KEY (`a_idAdres`),
     ADD KEY `postcode` (`a_postcode`);
 
 --
 -- Indexen voor tabel `tbl_klanten`
 --
 ALTER TABLE `tbl_klanten`
-    ADD PRIMARY KEY (`k_idKlant`),
-    ADD KEY `adres` (`k_fk_idAdres`);
+    ADD KEY `idAdres` (`k_fk_idAdres`);
 
 --
 -- Indexen voor tabel `tbl_meters`
 --
 ALTER TABLE `tbl_meters`
-    ADD PRIMARY KEY (`m_idMeter`),
-    ADD KEY `idMeter` (`m_fk_idAdres`) USING BTREE;
+    ADD KEY `idAdres` (`m_fk_idAdres`) USING BTREE;
 
 --
 -- Indexen voor tabel `tbl_meters_standen`
 --
 ALTER TABLE `tbl_meters_standen`
-    ADD PRIMARY KEY (`ms_idMeterstand`);
+    ADD KEY `idMeterTelwerk` (`ms_fk_idMeterTelwerk`);
 
 --
 -- Indexen voor tabel `tbl_meter_telwerken`
 --
 ALTER TABLE `tbl_meter_telwerken`
-    ADD PRIMARY KEY (`mt_idMeterTelwerk`),
     ADD UNIQUE KEY `mt_fk_idMeter` (`mt_fk_idMeter`,`mt_telwerk`,`mt_type`,`mt_product`),
     ADD KEY `idMeter` (`mt_fk_idMeter`);
-
---
--- AUTO_INCREMENT voor geëxporteerde tabellen
---
-
---
--- AUTO_INCREMENT voor een tabel `tbl_adressen`
---
-ALTER TABLE `tbl_adressen`
-    MODIFY `a_idAdres` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84105;
---
--- AUTO_INCREMENT voor een tabel `tbl_klanten`
---
-ALTER TABLE `tbl_klanten`
-    MODIFY `k_idKlant` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=133749;
---
--- AUTO_INCREMENT voor een tabel `tbl_meters_standen`
---
-ALTER TABLE `tbl_meters_standen`
-    MODIFY `ms_idMeterstand` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8008660;
---
--- AUTO_INCREMENT voor een tabel `tbl_meter_telwerken`
---
-ALTER TABLE `tbl_meter_telwerken`
-    MODIFY `mt_idMeterTelwerk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=418722;
