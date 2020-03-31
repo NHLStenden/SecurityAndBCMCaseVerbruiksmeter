@@ -15,25 +15,35 @@ $name     = "";
 
 foreach ($lines as $line) {
   $items = explode("=", $line);
-  switch($items[0]) {
+  $key   = $items[0];
+  $value = $items[1];
+
+  echo "[$key] = {$value}\n";
+  switch($key) {
     case "host":
-      $host = $items[1];
+      $host = $value;
       break;
     case "name":
-      $name = $items[1];
+      $name = $value;
       break;
     case "password":
-       $password = $items[1];
+       $password = $value;
       break;
     case "username":
-      $username = $items[1];
+      $username = $value;
       break;
   }
 }
+echo "HOST=$host\n";
+echo "DBNAME=$name\n";
+echo "USER=$username\n";
+echo "PASSWORD=$password\n";
 
 define ("DB_HOST",     $host );
 define ("DB_NAME",     $name );
 define ("DB_USERNAME", $username );
 define ("DB_PASSWORD", $password );
 
-define("MYSQL_DSN","mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . "");
+$connectStr = "mysql:host=" . $host  . ";dbname=" . $name;
+
+define("MYSQL_DSN",$connectStr);
