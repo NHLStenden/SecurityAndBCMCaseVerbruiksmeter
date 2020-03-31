@@ -42,11 +42,14 @@ GROUP BY postcode, ms_datum,mt_product;
 /**
   Alle meterstanden van een meter, per product in de tijd uitgezet
  */
-SELECT *
+SELECT mt_product as product,
+       mt_telwerk as telwerk,
+       mt_type as type,
+       ms_stand,
+       ms_datum,
+       ms_tijd
 FROM tbl_meters_standen
      JOIN tbl_meter_telwerken ON mt_idMeterTelwerk = ms_fk_idMeterTelwerk
 WHERE mt_fk_idMeter = 293058
-order by mt_product,
-         mt_telwerk,
-         ms_datum,
+order by mt_product, mt_telwerk,ms_datum,
          ms_tijd
