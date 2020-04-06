@@ -45,6 +45,7 @@ CREATE TABLE `tbl_adressen` (
 
 CREATE TABLE `tbl_klanten` (
    `k_idKlant` int(11) NOT NULL PRIMARY KEY  AUTO_INCREMENT,
+   `k_klantnummer` varchar(24) NOT NULL UNIQUE,
    `k_achternaam` varchar(100) NOT NULL,
    `k_voornaam` varchar(80) NOT NULL,
    `k_fk_idAdres` int(11) NOT NULL

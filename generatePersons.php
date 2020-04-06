@@ -15,12 +15,14 @@ echo "Klanten.......\n";
 $db->prepare("DELETE FROM tbl_klanten;")->execute();
 $db->prepare("SET NAMES utf8;")->execute();
 
-$sql_new_meter = "
+$sql_new_klant = "
   INSERT INTO tbl_klanten (
-    k_achternaam, 
+    k_achternaam,
+    k_klantnummer,
     k_fk_idAdres, 
     k_voornaam) VALUES (
-    :achternaam,                    
+    :achternaam,  
+    :klantnummer,
     :idAdres,
     :voornaam
   );
@@ -29,7 +31,7 @@ $sql_select_adressen = "
   SELECT * FROM tbl_adressen;
 ";
 
-$statement_new_klant       = $db->prepare($sql_new_meter);
+$statement_new_klant       = $db->prepare($sql_new_klant);
 $statement_select_adressen = $db->prepare($sql_select_adressen);
 if ($statement_new_klant       === false ) {var_dump($db->errorInfo());die();}
 if ($statement_select_adressen === false ) {var_dump($db->errorInfo());die();}
@@ -59,8 +61,11 @@ while (count($adressen)> 0) {
   $voornaam   = $voornamen[random_int(0,$count_voornamen-1)];
   $achternaam = $achternamen[random_int(0,$count_achternamen-1)];
 
+  $klantnummer = crc32($voornaam . $achternaam . $idAdres . $pAdres);
+
   $new_klant_values = [
      "achternaam" => $achternaam,
+     "klantnummer" => $klantnummer,
      "voornaam" => $voornaam,
      "idAdres" => $idAdres,
   ];
