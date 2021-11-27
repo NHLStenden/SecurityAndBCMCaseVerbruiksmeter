@@ -6,13 +6,13 @@ Maak via MySQL eerst zelf een database aan. Open daarna het bestand `CreateDatab
 de map `database` en voer deze uit binnen deze nieuwe database.
 
 ## Database instellingen opnemen
-Maak in de map met PHP-bestanden een nieuw bestand genaamd `database.settings.txt`. Zet daar onderstaande
-regels in en vul de juiste waarden in:
+Maak in de root van deze map met PHP-bestanden een nieuw bestand genaamd `database.settings`. 
+Zet daar onderstaande regels in en vul de juiste waarden in:
 ```ini
 host=localhost
-name=secriskyouthenergy
-username=myuser
-password=mypassword
+name=<databasenaam>
+username=<myuser>
+password=<mypassword>
 ```
 
 ## Instellen aantallen te genereren items
@@ -32,10 +32,7 @@ In het bestand `generateMeters.php` vind je bovenin een aantal instellingen:
 Hiermee kun je regelen hoe groot de set aan gegevens moet zijn.  
 
 ## Aanmaken random adressen, meters, meterstanden & klanten
-Wijzig eerst het bestand `constants.inc.php` om de juiste database informatie op te nemen in 
-dit script. 
-
-Open daarna een terminal venster op de locatie van deze scripts en start onderstaande commando's
+Open een terminal venster op de locatie van deze scripts en start onderstaande commando's
 
 ```bash
 php generateMeters.php
@@ -91,7 +88,7 @@ Uiteindelijk zullen er vele willekeurige gegevens in de database geplaatst worde
 Er worden grote hoeveelheden gegevens gegenereerd, dus enig geduld is wel nodig.
 Af en toe kun je in je database management tool (bijv. PHPMyAdmin) kijken hoe het er voor staat. Een voorbeeld:
 
-![imga](./images/database_report.png)
+![image](./images/database_report.png)
 
 Dit is met 50 steden als NR_OF_CITIES.
 
@@ -103,9 +100,11 @@ Het datamodel spreekt grofweg voor zichzelf:
 1. Een meter heeft één of meerdere telwerken 
 1. Een meter heeft één of meerdere meterstanden, steeds per telwerk.
 
+Hieronder vind je het Entity Relation Diagram dat de tabellen en hun relaties beschrijft.
+
+![ERD](images/Entity%20Relationship%20Diagram.png)
+
 ## Verbeteringen
 Deze data is natuurlijk pas het begin voor je project. Je zult zelf vast de nodige verbeteringen nodig hebben
 om de applicatie af te kunnen maken. 
 
-Let op: er zitten bewust nog geen foreign keys in deze database omdat anders het genereren van de grote
-hoeveelheden gegevens nogal lang gaat duren.  
