@@ -1,6 +1,6 @@
 <?php
 
-define("FILE_SETTINGS", "database.settings.txt");
+define("FILE_SETTINGS", "database.settings");
 
 if (! file_exists(FILE_SETTINGS)){
   die("#ERROR => Bestand " . FILE_SETTINGS . " niet gevonden. Zie README.md voor instructies.\n");
