@@ -8,6 +8,8 @@ class Medewerkers {
     public static $employeeGender = ['M', 'V', 'X'];
     public static  $emailDomain = 'mijn-nrg.nl';
 
+    public $listOfPersoneelsNrsGenerated = [];
+
     private $sql_new_mdw = "INSERT INTO tbl_medewerkers (
     emp_achternaam,      
     emp_voornaam,     
@@ -60,7 +62,6 @@ class Medewerkers {
         $this->db = $db;
         $this->setupPreparedStatements($db);
     }
-
 
     function setupPreparedStatements($db)
     {
@@ -150,6 +151,8 @@ class Medewerkers {
                     "datumUitDienst" => $datumUitDienst,
                 ];
                 $this->executePreparedStatementWithValues($this->statement_new_mdw, $new_mdw_values);
+
+                $this->listOfPersoneelsNrsGenerated[] = $personeelsnr;
             }
         }
     }// GenereerMedewerkers
