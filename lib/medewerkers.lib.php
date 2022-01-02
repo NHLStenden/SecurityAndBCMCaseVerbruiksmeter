@@ -27,8 +27,6 @@ class Medewerkers {
     private $sql_select_mdw = "
        SELECT * 
        FROM tbl_medewerkers as m 
-       WHERE m.emp_functie = 'medewerker backoffice'
-         and emp_bsn in ()
     ";
     private $sql_update_mdw_uitdienst = "
        UPDATE tbl_medewerkers
@@ -38,7 +36,7 @@ class Medewerkers {
     ";
     private $sql_update_mdw_pensioen = "
        UPDATE tbl_medewerkers
-          SET emp_datum_uit_dienst = :datumUitDienst, 
+          SET emp_datum_uit_dienst = :datumPensioen, 
               emp_status = 'P'
          WHERE emp_idEmployee = :id;
     ";
@@ -99,7 +97,7 @@ class Medewerkers {
     function GenereerMedewerkers($beschikbarefuncties)
     {
 
-        setupPreparedStatements($this->db);
+        $this->setupPreparedStatements($this->db);
 
         $voornamen_file = file_get_contents("./datafiles/voornamen.sorted.txt");
         $achternamen_file = file_get_contents("./datafiles/achternamen.sorted.txt");
@@ -120,17 +118,17 @@ class Medewerkers {
                 $personeelsnr = crc32($voornaam . $achternaam . rand());
                 $bsn = crc32(rand());
                 $mail_voornaam = preg_replace("/ /", "-", $voornaam);
-                $mail_achternaam = preg_replace("/(.*)\, (.*)/", '${2}.${1}', $achternaam);
+                $mail_achternaam = preg_replace("/(.*), (.*)/", '${2}.${1}', $achternaam);
                 $mail_achternaam = preg_replace("/ /", "-", $mail_achternaam);
 
-                $mail = "$mail_voornaam.$mail_achternaam@$this->emailDomain";
+                $mail = "$mail_voornaam.$mail_achternaam@". self::$emailDomain;
                 if (count($mogelijkeStatussen) > 1) {
                     $status = gewogenRandomFromArray($mogelijkeStatussen, [10, 30, 101]);
                 } else {
                     $status = $mogelijkeStatussen[0];
                 }
 
-                $geslacht = $this->employeeGender[rand(0, count($this->employeeGender) - 1)];
+                $geslacht = self::$employeeGender[rand(0, count(self::$employeeGender) - 1)];
                 $datumUitDienst = null;
 
                 if ($status != 'A') {
@@ -151,13 +149,29 @@ class Medewerkers {
                     "datumInDienst" => $datumInDienst,
                     "datumUitDienst" => $datumUitDienst,
                 ];
-                setParameterValues($this->statement_new_mdw, $new_mdw_values);
-                if (!$this->statement_new_mdw->execute()) {
-                    var_dump($new_mdw_values, $this->db->errorInfo());
-                    die();
-                }
+                $this->executePreparedStatementWithValues($this->statement_new_mdw, $new_mdw_values);
             }
         }
     }// GenereerMedewerkers
+
+    private function executePreparedStatementWithValues($statement, $values) {
+        setParameterValues($statement, $values);
+        if (! $statement->execute()) {
+            var_dump($statement, $values, $this->db->errorInfo());
+            die();
+        }
+    }//executePreparedStatementWithValues
+
+    function updateMedewerkerUitdienst($datum){
+        $this->executePreparedStatementWithValues($this->statement_update_mdw_uitdienst, ["datumUitDienst" => $datum]);
+    }//updateMedewerkerUitdienst
+
+    function updateMedewerkerPensioen($datum) {
+        $this->executePreparedStatementWithValues($this->statement_update_mdw_uitdienst, ["datumPensioen" => $datum]);
+    }
+
+    function updateMedewerkerFunctie($functie){
+        $this->executePreparedStatementWithValues($this->statement_update_mdw_uitdienst, ["functie" => $functie]);
+    }
 
 }//class Medewerkers

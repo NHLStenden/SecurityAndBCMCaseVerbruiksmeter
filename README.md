@@ -36,7 +36,7 @@ Open een terminal venster op de locatie van deze scripts en start onderstaande c
 
 ```bash
 php generateMeters.php
-php generatePersons.php
+php generateKlanten.php
 ```
 
 Je ziet enige rapportage over de voortgang. Genereren van meterstanden en adressen:

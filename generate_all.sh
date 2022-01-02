@@ -1,3 +1,3 @@
 php generateMeters.php
-php generatePersons.php
+php generateKlanten.php
 php generateMedewerkers.php

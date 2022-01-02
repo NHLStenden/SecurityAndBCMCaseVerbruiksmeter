@@ -13,7 +13,7 @@ echo "Performing cleanup\n.......\n";
 
 $db = new PDO(MYSQL_DSN, DB_USERNAME, DB_PASSWORD);
 echo "Klanten.......\n";
-$db->prepare("DELETE FROM tbl_klanten;")->execute();
+$db->prepare("TRUNCATE tbl_klanten;")->execute();
 $db->prepare("SET NAMES utf8;")->execute();
 
 $sql_new_klant = "
