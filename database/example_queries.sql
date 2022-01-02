@@ -54,3 +54,10 @@ FROM tbl_meters
          JOIN tbl_meters_standen tms on tmt.mt_idMeterTelwerk = tms.ms_fk_idMeterTelwerk
 WHERE m_idMeter = 293058
 order by m_product, mt_telwerk, ms_datum, ms_tijd
+
+/**
+  Aantal medewerkers per status
+ */
+select emp_status, count(*) as aantal
+from tbl_medewerkers
+GROUP BY emp_status;
