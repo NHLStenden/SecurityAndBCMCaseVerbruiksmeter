@@ -1,6 +1,7 @@
 <?php
 
 include_once 'generalFunctions.lib.php';
+include_once 'dbfunctions.lib.php';
 
 class Medewerkers {
 
@@ -95,13 +96,13 @@ class Medewerkers {
     }//setupPreparedStatements
 
 
-    function GenereerMedewerkers($beschikbarefuncties)
+    function GenereerMedewerkers($beschikbarefuncties, $pathToFiles)
     {
 
         $this->setupPreparedStatements($this->db);
 
-        $voornamen_file = file_get_contents("./datafiles/voornamen.sorted.txt");
-        $achternamen_file = file_get_contents("./datafiles/achternamen.sorted.txt");
+        $voornamen_file = file_get_contents($pathToFiles. "voornamen.sorted.txt");
+        $achternamen_file = file_get_contents($pathToFiles. "achternamen.sorted.txt");
         $voornamen = explode("\n", $voornamen_file);
         $achternamen = explode("\n", $achternamen_file);
         $count_voornamen = count($voornamen);
@@ -165,16 +166,19 @@ class Medewerkers {
         }
     }//executePreparedStatementWithValues
 
-    function updateMedewerkerUitdienst($datum){
-        $this->executePreparedStatementWithValues($this->statement_update_mdw_uitdienst, ["datumUitDienst" => $datum]);
+    function updateMedewerkerUitdienst($id, $datum){
+        $this->executePreparedStatementWithValues(
+            $this->statement_update_mdw_uitdienst, ["id" => $id, "datumUitDienst" => $datum]);
     }//updateMedewerkerUitdienst
 
-    function updateMedewerkerPensioen($datum) {
-        $this->executePreparedStatementWithValues($this->statement_update_mdw_uitdienst, ["datumPensioen" => $datum]);
+    function updateMedewerkerPensioen($id, $datum) {
+        $this->executePreparedStatementWithValues(
+            $this->statement_update_mdw_uitdienst, ["id" => $id, "datumPensioen" => $datum]);
     }
 
-    function updateMedewerkerFunctie($functie){
-        $this->executePreparedStatementWithValues($this->statement_update_mdw_uitdienst, ["functie" => $functie]);
+    function updateMedewerkerFunctie($id, $functie){
+        $this->executePreparedStatementWithValues(
+            $this->statement_update_mdw_uitdienst, ["id" => $id, "functie" => $functie]);
     }
 
 }//class Medewerkers
