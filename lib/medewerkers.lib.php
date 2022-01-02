@@ -178,7 +178,7 @@ class Medewerkers {
 
     function updateMedewerkerFunctie($id, $functie){
         $this->executePreparedStatementWithValues(
-            $this->statement_update_mdw_uitdienst, ["id" => $id, "functie" => $functie]);
+            $this->statement_update_mdw_functie, ["id" => $id, "functie" => $functie]);
     }
 
 }//class Medewerkers
