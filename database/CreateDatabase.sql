@@ -3,6 +3,7 @@ DROP TABLE IF EXISTS tbl_meter_telwerken;
 DROP TABLE IF EXISTS tbl_meters;
 DROP TABLE IF EXISTS tbl_klanten;
 DROP TABLE IF EXISTS tbl_adressen;
+DROP TABLE IF EXISTS tbl_medewerkers;
 
 -- --------------------------------------------------------
 --
@@ -84,6 +85,21 @@ CREATE TABLE tbl_meters_standen
     CONSTRAINT ms_fk_idMeterTelwerk FOREIGN KEY (ms_fk_idMeterTelwerk) REFERENCES tbl_meter_telwerken (mt_idMeterTelwerk)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
+
+CREATE TABLE tbl_medewerkers
+(
+    emp_idEmployee       INT(11)              NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    emp_achternaam       VARCHAR(80)          NOT NULL,
+    emp_voornaam         VARCHAR(40)          NOT NULL,
+    emp_bsn              VARCHAR(15)          NOT NULL UNIQUE,
+    emp_email            VARCHAR(200)         NOT NULL,
+    emp_status           ENUM ('A', 'P', 'U') NOT NULL COMMENT 'A=Actief, U=Uit dienst, P=Pensioen',
+    emp_personeelsnummer VARCHAR(15) UNIQUE,
+    emp_geslacht         ENUM ('M', 'V', 'X') NOT NULL COMMENT 'M=Man, V=Vrouw, X=Anders of niet bekend',
+    emp_functie          VARCHAR(50)          NOT NULL COMMENT 'Functie/rol van de medewerker',
+    emp_datum_in_dienst  DATE                 NOT NULL,
+    emp_datum_uit_dienst DATE                 NULL
+) COMMENT 'Interne medewerkers' ENGINE = InnoDB DEFAULT CHARSET = utf8;
 
 --
 -- Indexen voor geëxporteerde tabellen
