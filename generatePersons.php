@@ -7,6 +7,7 @@ function setParameterValues($statement, $parameters){
   }
 }//SetParameterValues
 
+srand(12345);
 
 echo "Performing cleanup\n.......\n";
 
@@ -54,12 +55,12 @@ while (count($adressen)> 0) {
 
   if ($count_adressen % 100 == 0) echo "Adres: $count_adressen \n";
 
-  $pAdres = random_int(0, count($adressen)-1);
+  $pAdres = rand(0, count($adressen)-1);
   $idAdres = $adressen[$pAdres]['a_idAdres'];
   array_splice($adressen, $pAdres, 1);
 
-  $voornaam   = $voornamen[random_int(0,$count_voornamen-1)];
-  $achternaam = $achternamen[random_int(0,$count_achternamen-1)];
+  $voornaam   = $voornamen[rand(0,$count_voornamen-1)];
+  $achternaam = $achternamen[rand(0,$count_achternamen-1)];
 
   $klantnummer = crc32($voornaam . $achternaam . $idAdres . $pAdres);
 

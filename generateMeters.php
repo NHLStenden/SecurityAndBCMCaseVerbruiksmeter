@@ -9,6 +9,7 @@ function setParameterValues($statement, $parameters)
     }
 }//SetParameterValues
 
+srand(12345);
 
 define("METERSTANDEN_DATE_START", "2016-01-01");
 define("NR_OF_METERSTANDEN", 49);
@@ -150,7 +151,7 @@ echo "Found:  $count_places places and $count_streets streets\n";
 $db->exec("SET autocommit = OFF:  ;");
 
 for ($nrOfCities = 0; $nrOfCities < NR_OF_CITIES; $nrOfCities++) {
-    $placenr = random_int(0, $count_places - 1);
+    $placenr = rand(0, $count_places - 1);
     $placenameRecord = $placenames[$placenr];
 
     # Split the placename record into its parts (plaatsnaam, gemeente, provincie, regio)
@@ -160,9 +161,9 @@ for ($nrOfCities = 0; $nrOfCities < NR_OF_CITIES; $nrOfCities++) {
     $provincie = $placenameParts[2];
     $regio = $placenameParts[3];
 
-    $postcode_base = random_int(1111, $count_places);
+    $postcode_base = rand(1111, $count_places);
 
-    $nrOfStreets = random_int(MIN_STREETS_PER_CITY, MAX_STREETS_PER_CITY);
+    $nrOfStreets = rand(MIN_STREETS_PER_CITY, MAX_STREETS_PER_CITY);
 
     echo "Using ($nrOfCities of " . NR_OF_CITIES . ") $placename and ZIP-code $postcode_base\n";
     echo " - Generating $nrOfStreets streets\n";
@@ -170,13 +171,13 @@ for ($nrOfCities = 0; $nrOfCities < NR_OF_CITIES; $nrOfCities++) {
 
     for ($str = 0; $str < $nrOfStreets; $str++) {
         // selecteer een random index voor de array met ingelezen straatnamen.
-        $streetnr = random_int(0, $count_streets - 1);
+        $streetnr = rand(0, $count_streets - 1);
         $streetname = $streetnames[$streetnr];
 
         // maak een random waarde voor het aantal adressen in een postcode.
-        $postcodesize = random_int(5, 20);
+        $postcodesize = rand(5, 20);
 
-        $nrOfHouses = random_int(MIN_HUISNUMMERS_PER_STRAAT, MAX_HUISNUMMERS_PER_STRAAT);
+        $nrOfHouses = rand(MIN_HUISNUMMERS_PER_STRAAT, MAX_HUISNUMMERS_PER_STRAAT);
 
         // use transactions to speed up by postponing the disk writes. Every transaction is one house address
         // including all meters etc.
@@ -185,8 +186,8 @@ for ($nrOfCities = 0; $nrOfCities < NR_OF_CITIES; $nrOfCities++) {
         echo "  - [$str] Generating $nrOfHouses home-addresses\n";
         for ($i = 0; $i < $nrOfHouses; $i++) {
             if ($i % $postcodesize == 0) {
-                $postcode_letter1 = chr(ord('A') + random_int(0, 25));
-                $postcode_letter2 = chr(ord('A') + random_int(0, 25));
+                $postcode_letter1 = chr(ord('A') + rand(0, 25));
+                $postcode_letter2 = chr(ord('A') + rand(0, 25));
             }
             $postcode = $postcode_base . $postcode_letter1 . $postcode_letter2;
 
@@ -238,11 +239,11 @@ for ($nrOfCities = 0; $nrOfCities < NR_OF_CITIES; $nrOfCities++) {
              */
 
             $telwerken = [
-                ["product" => "G", "type" => "V", "nr" => 1, "stand" => random_int(10, 5000)],  // gas levering
-                ["product" => "E", "type" => "V", "nr" => 1, "stand" => random_int(10, 5000)],  // electra, verbruik, hoog
-                ["product" => "E", "type" => "V", "nr" => 2, "stand" => random_int(10, 5000)],  // electra, verbruik laag
-                ["product" => "E", "type" => "T", "nr" => 3, "stand" => random_int(10, 5000)],  // electra, teruglevering hoog
-                ["product" => "E", "type" => "T", "nr" => 4, "stand" => random_int(10, 5000)],  // electra, teruglevering laag
+                ["product" => "G", "type" => "V", "nr" => 1, "stand" => rand(10, 5000)],  // gas levering
+                ["product" => "E", "type" => "V", "nr" => 1, "stand" => rand(10, 5000)],  // electra, verbruik, hoog
+                ["product" => "E", "type" => "V", "nr" => 2, "stand" => rand(10, 5000)],  // electra, verbruik laag
+                ["product" => "E", "type" => "T", "nr" => 3, "stand" => rand(10, 5000)],  // electra, teruglevering hoog
+                ["product" => "E", "type" => "T", "nr" => 4, "stand" => rand(10, 5000)],  // electra, teruglevering laag
             ];
 
             // loop door alle telwerken heen en voeg deze toe.
@@ -273,18 +274,18 @@ for ($nrOfCities = 0; $nrOfCities < NR_OF_CITIES; $nrOfCities++) {
                 $monthNr = ($j % 12) + 1;
 
                 // bepaal een random waarde voor de dag van de maand (alleen dag 1 t/m 8) waarin de meterstand wordt opgenomen.
-                $randomDay = random_int(1, 8);
+                $randomDay = rand(1, 8);
 
                 // bepaal random tijdstip op de gekozen waarop de meterstand wordt opgenomen.
-                $randomTime = date("H:i:s", random_int(1, ONE_DAY));
+                $randomTime = date("H:i:s", rand(1, ONE_DAY));
 
                 // wat is de verwachte minimale en maximale stijging (als % vh jaarverbruik) van het verbruik in deze maand?
                 $perc_low  = $monthDays[$monthNr]['usage_low'];
                 $perc_high = $monthDays[$monthNr]['usage_high'];
 
                 // kies een random jaarverbruik voor GAS en ELECTRA tussen de ingestelde bandbreedte
-                $jaarverbruik_e = random_int(AVERAGE_USAGE_YEAR_E_MIN, AVERAGE_USAGE_YEAR_E_MAX);
-                $jaarverbruik_g = random_int(AVERAGE_USAGE_YEAR_G_MIN, AVERAGE_USAGE_YEAR_G_MAX);
+                $jaarverbruik_e = rand(AVERAGE_USAGE_YEAR_E_MIN, AVERAGE_USAGE_YEAR_E_MAX);
+                $jaarverbruik_g = rand(AVERAGE_USAGE_YEAR_G_MIN, AVERAGE_USAGE_YEAR_G_MAX);
 
                 foreach ($telwerken as $key => $telwerk) {
                     # echo "    # maand: $monthNr\n";
@@ -312,7 +313,7 @@ for ($nrOfCities = 0; $nrOfCities < NR_OF_CITIES; $nrOfCities++) {
                             break;
                     }
 
-                    $telwerken[$key]['stand'] += $year_consume * (random_int($perc_low, $perc_high) / 100);
+                    $telwerken[$key]['stand'] += $year_consume * (rand($perc_low, $perc_high) / 100);
                 }// for each telwerk
 
                 // add a number of days according to the month of the year
