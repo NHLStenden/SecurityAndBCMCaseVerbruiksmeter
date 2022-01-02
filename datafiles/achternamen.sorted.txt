@@ -1,30 +1,30 @@
-Abal van der Pieterman
 Abalde Gonzalez
+Abal van der Pieterman
 Abas Poor
 Abbas Ghazvini
-Abd El Ghany
-Abd El Hamid Gamal Abd El Hamid El Sharkawy
 Abdel Gabar
 Abdel Gawad
-Abdel Ghaffar
-Abdel Ghany Mahmoud
-Abdel Rahman Nabil Abd El Rahman El Gohari
 Abdel-Gawad
 Abdel-Gelil
 Abdel-Ghafar
+Abdel Ghaffar
+Abd El Ghany
+Abdel Ghany Mahmoud
+Abd El Hamid Gamal Abd El Hamid El Sharkawy
+Abdel Rahman Nabil Abd El Rahman El Gohari
 Abdi Ghods
-Abdi Pour
 Abdi-Goulid
+Abdi Pour
 Abdoel Gafoer
 Abdoel-Gafoer
 Abdul Gafur Barkat Shah
 Abdul Ghafour
 Abdul-Ghani
-Abe Pereira de Carvalho
-Abedin Pour Shirazi
 Abedin Pourshirazi
+Abedin Pour Shirazi
 Abegunde Gomez
 Abel Gonzalez
+Abe Pereira de Carvalho
 Ablaing van Giessenburg, d'
 Abolfathi Pour
 Abolhassan Pour
@@ -60,8 +60,8 @@ Adham Ahmed Mahmoud Ghazy
 Adham Pour
 Adham Shawky Gaber Shawky Hafez
 Adu Gyamfi
-Adu Gyan
 Adu-Gyamfi
+Adu Gyan
 Adu-Poku
 Adusei Poku
 Adusei-Poku
@@ -84,25 +84,25 @@ Aires Pereira
 Akbar-Pour
 Alaft Poor
 Alas Paz
-Alba Pinto
 Alban Perez
 Alban Pérez
+Alba Pinto
 Albarracin Pluas
 Albers Pistorius
 Albornoz Pajuelo
 Conceição Nereu, da
 Conceição Nobre, da
 Conceição Oliveira, da
-Conceição Pereira Lopes, da
 Conceiçao Pereira, da
+Conceição Pereira Lopes, da
 Conceição Pinhão, Da
 Conceiçăo Ramalho, da
 Conceicao Ribeiro, De
 Conceição Ricardo, da
 Conceição Rodrigues, da
 Conceição Salvador, da
-Conceição Santos Delgado, da
 Conceição Santos, da
+Conceição Santos Delgado, da
 Conceição Silva, da
 Conceição Soares, da
 Conceição Spencer, da
@@ -198,8 +198,6 @@ Phuthongwichit
 Phyl
 Phylipsen
 Physco Canencio
-Pi Pujol
-Pi Van de Venne
 Pi
 Pia
 Piabsom
@@ -212,9 +210,9 @@ Piana, La
 Pianalto
 Pianaung
 Pianim
-Piano Mortari
 Piano
 Piano, Lo
+Piano Mortari
 Piantoni
 Piar
 Piaralal
@@ -240,12 +238,14 @@ Piatkowska
 Piątkowska
 Piatkowski
 Pia-Ud
+Pi Pujol
+Pi Van de Venne
 's Gravemade
 's-Gravemade
 's-Gravendijk
 's-Gravendyk
-'s-Gravesande Pannekoek
 's-Gravesande
+'s-Gravesande Pannekoek
 't-Gilde
 Velazquez Gandara
 Velázquez González
@@ -274,8 +274,8 @@ Vijfstuk de Groot
 Vila Guerau de Arellano
 Vilá Guerau de Arellano
 Vilas Gonzalez
-Villa Gomez
 Villabona Graciani
+Villa Gomez
 Villagra Guanes
 Villalobos Guardado
 Villaman Gonzalez
@@ -285,29 +285,29 @@ Villegas Gallego
 Villegas Gómez
 Viola Gonzalez
 Viruez Guanacoma
-Vis Dieperink
+Visch, de
 Visch Eijbergen, de
 Visch Eybergen, de
-Visch, de
 Visch, van de
 Visch, van der
+Vis Dieperink
 Visger, van de
 Visitação Henriques, da
 Visitação Vasco, da
 Viso, de
-Visscher Gorter
 Visscher, de
 Visscher, De
-Visse, van de
+Visscher Gorter
 Vissen, de
-Visser Gonçalves
-Visser Smits, de
-Visser van Bloemen, de
-Visser van der Hilst
 Visser, de
 Visser, De
-Visser, van de
+Visser Gonçalves
 Vissersdijk, van de
+Visser Smits, de
+Visser van Bloemen, de
+Visser, van de
+Visser van der Hilst
+Visse, van de
 Vita, de
 Vita, De
 Vitiello de los Santos
@@ -330,64 +330,64 @@ Vlag, van de
 Vlag, van der
 Vlam, de
 Vlaminck, de
-Vlaming Pleijsier, de
 Vlaming, de
-Vlas, de
+Vlaming Pleijsier, de
 Vlasakker, van de
-Vleesch du Bois
-Vleesch Du Bois
-Vleesch Dubois
+Vlas, de
 Vleeschauwer, De
+Vleesch du Bois
+Vleesch Dubois
 Vleesch-Dubois
-Vleeschhouwer Kroes, de
+Vleesch Du Bois
 Vleeschhouwer, de
+Vleeschhouwer Kroes, de
 Vojoudi Ghanad
 Vollenhoven Gonzalez, van
 Volpe Garcia
+Vos van Steenwijk genaamd van Essen, de
 Vos van Steenwijk genaamd van Essen tot Windesheim
 Vos van Steenwijk genaamd van Essen tot Windesheim, de
-Vos van Steenwijk genaamd van Essen, de
 Wal Agraz, van der
-Wal Clarke, van der
-Wal Ferronha, van der
-Wal Mourik, van der
-Wal, Van Der
 Wal-Anderson, van der
 Walbeeck de Saint Malo, van
+Wal Clarke, van der
 Walde, von der
 Waldt, van der
 Walenkamp den Haan
+Wal Ferronha, van der
 Walick, de
 Walken, van der
-Wall Arneman, van de
 Wall Arnemann, van den
+Wall Arneman, van de
 Wall Bake, van den
-Wall Perné, van de
-Wall Perné, van der
-Wall Repelaer, van de
 Wall, de
-Wall, van de
-Wall, Van de
-Wall, van der
-Walle Gonçalves, van der
 Walle, de
-Walle, van de
-Walle, Van de
-Walle, van der
+Walle Gonçalves, van der
 Wallen, van der
 Wallen, Van der
 Waller Diemont
 Waller, van de
+Walle, van de
+Walle, Van de
+Walle, van der
 Wallis de Vries
+Wall Perné, van de
+Wall Perné, van der
+Wall Repelaer, van de
+Wall, van de
+Wall, Van de
+Wall, van der
 Walma van der Molen
+Wal Mourik, van der
 Walré de Bordes, van
+Walscheid van Dijk
 Wals, de
 Wals, van der
-Walscheid van Dijk
+Waltenberg Donkel
 Walt, van der
 Walt, Van der
 Walt, Van Der
-Waltenberg Donkel
+Wal, Van Der
 Wan, de
 Wan, De
 Wandel, de
@@ -404,11 +404,11 @@ Westen, van den
 Westen, van der
 Westen, von den
 Westerbaan van der Meij
-Westering, van de
 Westeringh, van de
+Westering, van de
 Westerlaken, van der
-Westerlo, van de
 Westerloo, van de
+Westerlo, van de
 Westhuizen, van der
 Westhuizen, Van Der
 Westphalen, de
@@ -416,12 +416,12 @@ Wet, de
 Wet, De
 Wetering bijgenaamd de Rooij, van de
 Wetering, bijgenaamd de Rooij, van de
-Wetering, van de
-Wetering, van der
 Weteringe Buijs, van de
 Weteringe Buys, van de
 Weteringen, van de
 Weteringh, van de
+Wetering, van de
+Wetering, van der
 Weterink, van de
 Wetstein Pfister, de
 Wette, de
@@ -429,9 +429,8 @@ Weurf, van der
 Weurman de Andrade Albuquerque Silva
 Wever, de
 Wever, De
-Wey, van der
-Weyde, van der
 Weyden, van der
+Weyde, van der
 Weyer, de
 Weyer, van de
 Weyer, Van de
@@ -440,10 +439,11 @@ Weygaert, van de
 Weygaert, Van de
 Weyn, de
 Weys, de
+Wey, van der
 Whitaker Dixon
 Wibisono Danarta
 Wid, de
 Widt, de
-Wie, van der
 Więckiewicz-In den Haak
 Wied, de
+Wie, van der
