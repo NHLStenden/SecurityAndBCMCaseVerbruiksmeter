@@ -174,7 +174,7 @@ class Medewerkers {
 
     function updateMedewerkerPensioen($id, $datum) {
         $this->executePreparedStatementWithValues(
-            $this->statement_update_mdw_uitdienst, ["id" => $id, "datumPensioen" => $datum]);
+            $this->statement_update_mdw_pensioen, ["id" => $id, "datumPensioen" => $datum]);
     }
 
     function updateMedewerkerFunctie($id, $functie){
