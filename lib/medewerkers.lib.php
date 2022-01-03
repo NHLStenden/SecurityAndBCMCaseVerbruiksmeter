@@ -35,19 +35,19 @@ class Medewerkers {
        UPDATE tbl_medewerkers
           SET emp_datum_uit_dienst = :datumUitDienst, 
               emp_status = 'U'
-         WHERE emp_idEmployee = :id;
+         WHERE emp_personeelsnummer = :id;
     ";
     private $sql_update_mdw_pensioen = "
        UPDATE tbl_medewerkers
           SET emp_datum_uit_dienst = :datumPensioen, 
               emp_status = 'P'
-         WHERE emp_idEmployee = :id;
+         WHERE emp_personeelsnummer = :id;
     ";
 
     private $sql_update_mdw_functie = "
        UPDATE tbl_medewerkers
           SET emp_functie = :functie
-         WHERE emp_idEmployee = :id;
+         WHERE emp_personeelsnummer = :id;
     ";
 
     private $statement_mdw_backoffice = null;
@@ -160,8 +160,9 @@ class Medewerkers {
 
     private function executePreparedStatementWithValues($statement, $values) {
         setParameterValues($statement, $values);
-        if (! $statement->execute()) {
-            var_dump($statement, $values, $this->db->errorInfo());
+        $result = $statement->execute();
+        if ($result != true) {
+            var_dump($statement, $values, $statement->errorInfo());
             die();
         }
     }//executePreparedStatementWithValues
