@@ -11,10 +11,15 @@ function setParameterValues($statement, $parameters)
 
 srand(12345);
 
+define("ONE_DAY", 24 * 60 * 60);
+
+/****
+ * Deze waarden mogen aangepast worden om een kleinere data-set te genereren.
+ *
+ * Let op: onderstaande waarden MOETEN gebruikt worden bij oplevering van de VM!!!
+ */
 define("METERSTANDEN_DATE_START", "2016-01-01");
 define("NR_OF_METERSTANDEN", 49);
-
-define("ONE_DAY", 24 * 60 * 60);
 
 define("NR_OF_CITIES", 5);
 
