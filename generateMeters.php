@@ -19,12 +19,11 @@ define("ONE_DAY", 24 * 60 * 60);
  * Let op: onderstaande waarden MOETEN gebruikt worden bij oplevering van de VM!!!
  */
 define("METERSTANDEN_DATE_START", "2016-01-01");
-define("NR_OF_METERSTANDEN", 49);
 
-define("NR_OF_CITIES", 5);
+define("NR_OF_CITIES", 10);
 
-define("MIN_STREETS_PER_CITY", 5);
-define("MAX_STREETS_PER_CITY", 20);
+define("MIN_STREETS_PER_CITY", 30);
+define("MAX_STREETS_PER_CITY", 75);
 
 define("MIN_HUISNUMMERS_PER_STRAAT", 10);
 define("MAX_HUISNUMMERS_PER_STRAAT", 40);
@@ -155,6 +154,26 @@ $count_places  = count($placenames);
 echo "Found:  $count_places places and $count_streets streets\n";
 $db->exec("SET autocommit = OFF:  ;");
 
+/*************************************
+ * Determine how many months have passed since the given start-date.
+ */
+$today      = new DateTime("now");
+$date_start = new DateTime(METERSTANDEN_DATE_START);
+$interval   = $date_start->diff($today);
+
+$todayStr     = $today->format("d D F Y");
+$dateStartStr = $date_start->format("d D F Y");
+
+echo "--------------------------------\n";
+echo "Today is $todayStr\n";
+echo "Startdate is $dateStartStr\n";
+$nrOfMeterstanden = $interval->m + $interval->y * 12;
+echo "Aantal meterstanden per adres : $nrOfMeterstanden\n";
+echo "--------------------------------\n";
+
+/*******************************
+ * Now generate the cities, addresses and meteringvalues
+ */
 for ($nrOfCities = 0; $nrOfCities < NR_OF_CITIES; $nrOfCities++) {
     $placenr = rand(0, $count_places - 1);
     $placenameRecord = $placenames[$placenr];
@@ -274,7 +293,7 @@ for ($nrOfCities = 0; $nrOfCities < NR_OF_CITIES; $nrOfCities++) {
             // een dubbele lus die per maand / datum / tijd voor alle telwerken een meterstand opvoert
             // er wordt gewerkt met een tabel met percentages om de groei van de meterstand te bepalen met een random factor
             $addedDays = 1;
-            for ($j = 0; $j < NR_OF_METERSTANDEN; $j++) {
+            for ($j = 0; $j < $nrOfMeterstanden; $j++) {
                 // bepaal maandnummer
                 $monthNr = ($j % 12) + 1;
 

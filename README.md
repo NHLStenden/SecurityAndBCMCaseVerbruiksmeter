@@ -6,7 +6,7 @@ Maak via MySQL eerst zelf een database aan. Open daarna het bestand `CreateDatab
 de map `database` en voer deze uit binnen deze nieuwe database.
 
 ## Database instellingen opnemen
-Maak in de root van deze map met PHP-bestanden een nieuw bestand genaamd `database.settings`. 
+Maak in de root van deze map met PHP-bestanden een nieuw bestand genaamd `database.settings`.
 Zet daar onderstaande regels in en vul de juiste waarden in:
 ```ini
 host=localhost
@@ -18,18 +18,23 @@ password=<mypassword>
 ## Instellen aantallen te genereren items
 In het bestand `generateMeters.php` vind je bovenin een aantal instellingen:
 ```php
-  define ("METERSTANDEN_DATE_START", "2016-01-01");
-  define ("NR_OF_METERSTANDEN", 12);
+define("METERSTANDEN_DATE_START", "2016-01-01");
 
-  define ("NR_OF_CITIES",5);
+define("NR_OF_CITIES", 10);
 
-  define ("MIN_STREETS_PER_CITY", 5);
-  define ("MAX_STREETS_PER_CITY", 20);
+define("MIN_STREETS_PER_CITY", 30);
+define("MAX_STREETS_PER_CITY", 75);
 
-  define ("MIN_HUISNUMMERS_PER_STRAAT",10);
-  define ("MAX_HUISNUMMERS_PER_STRAAT",40);
+define("MIN_HUISNUMMERS_PER_STRAAT", 10);
+define("MAX_HUISNUMMERS_PER_STRAAT", 40);
+
+// het gemiddelde jaarverbruik voor GAS en ELECTRA (bandbreedte MIN-MAX)
+define("AVERAGE_USAGE_YEAR_E_MIN", 3500);
+define("AVERAGE_USAGE_YEAR_E_MAX", 4500);
+define("AVERAGE_USAGE_YEAR_G_MIN", 3000);
+define("AVERAGE_USAGE_YEAR_G_MAX", 4500);
 ```
-Hiermee kun je regelen hoe groot de set aan gegevens moet zijn.  
+Hiermee kun je regelen hoe groot de set aan gegevens moet zijn.
 
 ## Aanmaken random adressen, meters, meterstanden & klanten
 Open een terminal venster op de locatie van deze scripts en start onderstaande commando's
@@ -84,7 +89,7 @@ Adres: 10600
 ...........
 ```
 
-Uiteindelijk zullen er vele willekeurige gegevens in de database geplaatst worden. 
+Uiteindelijk zullen er vele willekeurige gegevens in de database geplaatst worden.
 Er worden grote hoeveelheden gegevens gegenereerd, dus enig geduld is wel nodig.
 Af en toe kun je in je database management tool (bijv. PHPMyAdmin) kijken hoe het er voor staat. Een voorbeeld:
 
@@ -92,12 +97,12 @@ Af en toe kun je in je database management tool (bijv. PHPMyAdmin) kijken hoe he
 
 Dit is met 50 steden als NR_OF_CITIES.
 
-Zie vervolgens in de map `database` het bestand  `example_queries.sql` voor enkele voorbeelden. 
+Zie vervolgens in de map `database` het bestand  `example_queries.sql` voor enkele voorbeelden.
 Het datamodel spreekt grofweg voor zichzelf:
 
 1. Een adres heeft een uniek ID
 1. Elke meter verwijst naar één adres via m_fk_idAdres
-1. Een meter heeft één of meerdere telwerken 
+1. Een meter heeft één of meerdere telwerken
 1. Een meter heeft één of meerdere meterstanden, steeds per telwerk.
 
 Hieronder vind je het Entity Relation Diagram dat de tabellen en hun relaties beschrijft.
