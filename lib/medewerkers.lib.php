@@ -167,19 +167,48 @@ class Medewerkers {
         }
     }//executePreparedStatementWithValues
 
-    function updateMedewerkerUitdienst($id, $datum){
+    function updateMedewerkerUitdienstInDatabase($id, $datum){
         $this->executePreparedStatementWithValues(
             $this->statement_update_mdw_uitdienst, ["id" => $id, "datumUitDienst" => $datum]);
-    }//updateMedewerkerUitdienst
+    }// updateMedewerkerUitdienstInDatabase
 
-    function updateMedewerkerPensioen($id, $datum) {
+    function updateMedewerkerPensioenInDatabase($id, $datum) {
         $this->executePreparedStatementWithValues(
             $this->statement_update_mdw_pensioen, ["id" => $id, "datumPensioen" => $datum]);
-    }
+    }// updateMedewerkerPensioenInDatabase
 
-    function updateMedewerkerFunctie($id, $functie){
+    function updateMedewerkerFunctieInDatabase($id, $functie){
         $this->executePreparedStatementWithValues(
             $this->statement_update_mdw_functie, ["id" => $id, "functie" => $functie]);
+    }// updateMedewerkerFunctieInDatabase
+
+    /**
+     * @param $record {array} key-value pair array representing a record from a PDO-query
+     * @param $datum {string} string representing a valid MySQL Date (e.g. 2022-02-27)
+     * @return void
+     */
+    static function updateMedewerkerUitdienst(array &$record, string $datum){
+        $record['emp_datum_uit_dienst'] = $datum;
+        $record['emp_status'] = 'U';
+    }//updateMedewerkerUitdienst
+
+    /**
+     * @param $record {array} a key-value pair array representing a record from a PDO-query
+     * @param $datum  {string} $datum a string representing a valid MySQL Date (e.g. 2022-02-27)
+     * @return void
+     */
+   static function updateMedewerkerPensioen(array &$record, string $datum) {
+        $record['emp_datum_uit_dienst'] = $datum;
+        $record['emp_status'] = 'P';
+    }
+
+    /**
+     * @param $record  {array} a key-value pair array representing a record from a PDO-query
+     * @param $functie {string} the new function
+     * @return void
+     */
+    static function updateMedewerkerFunctie(array &$record, string $functie){
+        $record['emp_functie'] = $functie;
     }
 
 }//class Medewerkers
