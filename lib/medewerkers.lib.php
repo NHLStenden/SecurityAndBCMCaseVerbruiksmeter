@@ -58,13 +58,13 @@ class Medewerkers {
 
     private $db;
 
-    public function __construct($db)
+    public function __construct(PDO $db)
     {
         $this->db = $db;
-        $this->setupPreparedStatements($db);
+        $this->setupPreparedStatements();
     }
 
-    function setupPreparedStatements($db)
+    function setupPreparedStatements()
     {
         $this->statement_mdw_backoffice       = $this->db->prepare($this->sql_new_mdw);
         $this->statement_update_mdw_uitdienst = $this->db->prepare($this->sql_update_mdw_uitdienst);
@@ -73,33 +73,33 @@ class Medewerkers {
         $this->statement_new_mdw              = $this->db->prepare($this->sql_new_mdw);
 
         if ($this->statement_new_mdw === false) {
-            var_dump($db->errorInfo());
+            var_dump($this->db->errorInfo());
             die("Cannot setup SQL for new Employee");
         }
         if ($this->statement_mdw_backoffice === false) {
-            var_dump($db->errorInfo());
+            var_dump($this->db->errorInfo());
             die("Error in query select mdw");
         }
         if ($this->statement_update_mdw_uitdienst === false) {
-            var_dump($db->errorInfo());
+            var_dump($this->db->errorInfo());
             die("Error in query update employee (uitdienst)");
         }
         if ($this->statement_update_mdw_pensioen === false) {
-            var_dump($db->errorInfo());
+            var_dump($this->db->errorInfo());
             die("Error in query update employee (pensioen)");
         }
         if ($this->statement_update_mdw_functie === false) {
-            var_dump($db->errorInfo());
+            var_dump($this->db->errorInfo());
             die("Error in query update employee (functie)");
         }
 
     }//setupPreparedStatements
 
 
-    function GenereerMedewerkers($beschikbarefuncties, $pathToFiles)
+    function GenereerMedewerkers(array $beschikbarefuncties, $pathToFiles)
     {
 
-        $this->setupPreparedStatements($this->db);
+        $this->setupPreparedStatements();
 
         $voornamen_file = file_get_contents($pathToFiles. "voornamen.sorted.txt");
         $achternamen_file = file_get_contents($pathToFiles. "achternamen.sorted.txt");
@@ -158,7 +158,7 @@ class Medewerkers {
         }
     }// GenereerMedewerkers
 
-    private function executePreparedStatementWithValues($statement, $values) {
+    private function executePreparedStatementWithValues(PDOStatement $statement, array $values) {
         setParameterValues($statement, $values);
         $result = $statement->execute();
         if ($result != true) {
@@ -167,17 +167,17 @@ class Medewerkers {
         }
     }//executePreparedStatementWithValues
 
-    function updateMedewerkerUitdienstInDatabase($id, $datum){
+    function updateMedewerkerUitdienstInDatabase(string $id, string $datum){
         $this->executePreparedStatementWithValues(
             $this->statement_update_mdw_uitdienst, ["id" => $id, "datumUitDienst" => $datum]);
     }// updateMedewerkerUitdienstInDatabase
 
-    function updateMedewerkerPensioenInDatabase($id, $datum) {
+    function updateMedewerkerPensioenInDatabase(string $id, string $datum) {
         $this->executePreparedStatementWithValues(
             $this->statement_update_mdw_pensioen, ["id" => $id, "datumPensioen" => $datum]);
     }// updateMedewerkerPensioenInDatabase
 
-    function updateMedewerkerFunctieInDatabase($id, $functie){
+    function updateMedewerkerFunctieInDatabase(string $id,string $functie){
         $this->executePreparedStatementWithValues(
             $this->statement_update_mdw_functie, ["id" => $id, "functie" => $functie]);
     }// updateMedewerkerFunctieInDatabase
@@ -197,7 +197,7 @@ class Medewerkers {
      * @param $datum  {string} $datum a string representing a valid MySQL Date (e.g. 2022-02-27)
      * @return void
      */
-   static function updateMedewerkerPensioen(array &$record, string $datum) {
+    static function updateMedewerkerPensioen(array &$record, string $datum) {
         $record['emp_datum_uit_dienst'] = $datum;
         $record['emp_status'] = 'P';
     }

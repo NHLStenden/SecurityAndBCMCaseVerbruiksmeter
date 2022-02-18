@@ -1,6 +1,6 @@
 <?php
 
-function setParameterValues($statement, $parameters)
+function setParameterValues(PDOStatement $statement, $parameters)
 {
     foreach ($parameters as $key => $value) {
         $statement->bindValue(":" . $key, $value);
