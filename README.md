@@ -2,8 +2,62 @@
 Supporting code for the case of the "Verbruiksmeter"
 
 ## Aanmaken database
-Maak via MySQL eerst zelf een database aan. Open daarna het bestand `CreateDatabase.sql` uit
+Maak via MySQL eerst zelf een database aan met de naam `energy` of `nrg`. Open daarna het bestand `CreateDatabase.sql` uit
 de map `database` en voer deze uit binnen deze nieuwe database.
+
+Om een database aan te maken en te gebruiken moet je de juiste rechten hebben. Zie ook [MariaDB GRANT](https://mariadb.com/kb/en/grant/).  We gaan eerst controleren of
+de juiste user ('website'@'%') wel de juiste rechten heeft. Dit is de user die je kunt gebruiken via PHPStorm. 
+
+**LET OP** Een gebruiker op MySQL en MariaDB is een combinatie van een gebruikersnaam ('website') en een host waar vandaan je **inlogt** (en dus **niet** de host waar MySQL of MariaDB op draait!). 
+
+We gebruiken het wildcard teken `'%'` om aan te geven dat je van alle hosts mag verbinden. Dit is meestal **NIET** verstandig in productie, maar wel *handig* voor de **development-fase**. Het probleem is namelijk dat je dan vanaf de buitenwereld toegang tot het DBMS (MySQL/MariaDB) openzet en dat is normaliter niet gewenst. Zorg er dus voor dat je dergelijke gebruikers weer opruimt voordat je je VM oplevert!
+
+Je kunt ook gebruikmaken van `'localhost'` om aan te geven dat je alleen vanaf dezelfde machine als waar MariaDB/MySQL geinstalleerd staat mag verbinden. Dit is typisch de manier om je PHP-code aan de database te verbinden.
+
+```bash
+student@secbcm:~$ sudo mysql -u root
+[sudo] password for student:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 34
+Server version: 10.5.12-MariaDB-0+deb11u1 Debian 11
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use mysql;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+MariaDB [mysql]> select user,host from user;
++-------------+-----------+
+| User        | Host      |
++-------------+-----------+
+| website     | %         |
+| mariadb.sys | localhost |
+| mysql       | localhost |
+| root        | localhost |
+| website     | localhost |
++-------------+-----------+
+5 rows in set (0.001 sec)
+
+MariaDB [mysql]> SHOW GRANTS FOR 'website'@'%';
++--------------------------------------------------------------------------------------------------------+
+| Grants for website@%                                                                                   |
++--------------------------------------------------------------------------------------------------------+
+| GRANT USAGE ON *.* TO `website`@`%` IDENTIFIED BY PASSWORD '*0CD1AE57344BB752E3A08B733916948E5A4BF96C' |
+| GRANT ALL PRIVILEGES ON `nrg`.* TO `website`@`%`                                                       |
+| GRANT ALL PRIVILEGES ON `energy`.* TO `website`@`%`                                                    |
++--------------------------------------------------------------------------------------------------------+
+3 rows in set (0.000 sec)
+
+```
+
+We zien nu dat de user 'website'@'%' het recht 'USAGE' heeft voor MariaDB. Daarnaast heeft deze user alle rechten ('ALL PRIVILIGES') voor twee databases: 'nrg' en 'energy'. 
+
+**LET OP** Als je dus een andere databasenaam gebruikt, zul je zelf een `GRANT` statement moeten uitvoeren om de juiste rechten te zetten.
+
 
 ## Database instellingen opnemen
 Maak in de root van deze map met PHP-bestanden een nieuw bestand genaamd `database.settings`.
