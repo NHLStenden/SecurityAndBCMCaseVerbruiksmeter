@@ -69,6 +69,41 @@ username=<myuser>
 password=<mypassword>
 ```
 
+**LET OP** Als je gegevens kopieert en plakt van Windows naar Linux kun je last krijgen met het probleem van regelovergangen. Zie ook [hier](https://www.aleksandrhovhannisyan.com/blog/crlf-vs-lf-normalizing-line-endings-in-git/#crlf-vs-lf-what-are-line-endings-anyway).
+
+Mocht je dus bovenstaande tekst kopieren en plakken in software die voor Windows gemaakt is heb je kans dat er achter elke regel een onzichtbaar teken staat (de `CR`). 
+Je krijgt dat bijvoorbeeld een foutmelding (`php_network_getaddresses: getaddrinfo failed: Name or service not known in`) dat de host niet gevonden kan worden, 
+terwijl er wel gewoon `localhost` lijkt te staan. 
+
+```PHP
+[host] = localhost
+[name] = <databasenaam>
+[username] = <myuser>
+[password] = <mypassword>
+HOST=localhost
+DBNAME=<databasenaam>
+USER=<myuser>
+PASSWORD=<mypassword>
+PHP Fatal error:  Uncaught PDOException: PDO::__construct(): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/student/SecurityAndBCMCaseVerbruiksmeter/generateMedewerkers.php:24
+Stack trace:
+#0 /home/student/SecurityAndBCMCaseVerbruiksmeter/generateMedewerkers.php(24): PDO->__construct()
+#1 {main}
+
+Next PDOException: SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/student/SecurityAndBCMCaseVerbruiksmeter/generateMedewerkers.php:24
+Stack trace:
+#0 /home/student/SecurityAndBCMCaseVerbruiksmeter/generateMedewerkers.php(24): PDO->__construct()
+#1 {main}
+  thrown in /home/student/SecurityAndBCMCaseVerbruiksmeter/generateMedewerkers.php on line 24
+student@secbcm:~/SecurityAndBCMCaseVerbruiksmeter$
+```
+Eenvoudigste oplossing is door in een teksteditor (bijv. PHPStorm of Notepad++) rechtsonderin te checken.
+
+![image 1](./images/NotepadPlusPlus-crlf.png)
+![image 2](./images/NotepadPlusPlus-lf.png)
+![image 3](./images/PHPStorm-crlf.png)
+
+
+
 ## Instellen aantallen te genereren items
 In het bestand `generateMeters.php` vind je bovenin een aantal instellingen:
 ```php
