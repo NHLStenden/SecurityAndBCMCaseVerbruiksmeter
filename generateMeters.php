@@ -152,7 +152,7 @@ $count_streets = count($streetnames);
 $count_places  = count($placenames);
 
 echo "Found:  $count_places places and $count_streets streets\n";
-$db->exec("SET autocommit = OFF:  ;");
+$db->exec("SET autocommit = OFF;  ;");
 
 /*************************************
  * Determine how many months have passed since the given start-date.
