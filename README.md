@@ -58,7 +58,7 @@ We zien nu dat de user 'website'@'%' het recht 'USAGE' heeft voor MariaDB. Daarn
 
 **LET OP** Als je dus een andere databasenaam gebruikt, zul je zelf een `GRANT` statement moeten uitvoeren om de juiste rechten te zetten.
 
-**LET OP** Als je nog geen gebruiker hebt dan moet je zelf een nieuwe gebruiker aanmaken. Instructies vindt je op de [MariaDB Website](https://mariadb.com/kb/en/create-user/).
+**LET OP** Als je nog geen gebruiker hebt dan moet je zelf een nieuwe gebruiker aanmaken. Instructies vindt je op de [MariaDB Website](https://mariadb.com/kb/en/create-user/). Gebruik de variant waarbij je een "Authentication Plugin" gebruikt van het type ["mysql_native_password"](https://mariadb.com/kb/en/authentication-plugin-mysql_native_password/). Zie ook [hier](https://mariadb.com/kb/en/create-user/#identified-viawith-authentication_plugin). 
 
 ## Database instellingen opnemen
 Maak in de root van deze map met PHP-bestanden een nieuw bestand genaamd `database.settings`.
