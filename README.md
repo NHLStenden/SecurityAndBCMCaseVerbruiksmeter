@@ -58,6 +58,7 @@ We zien nu dat de user 'website'@'%' het recht 'USAGE' heeft voor MariaDB. Daarn
 
 **LET OP** Als je dus een andere databasenaam gebruikt, zul je zelf een `GRANT` statement moeten uitvoeren om de juiste rechten te zetten.
 
+**LET OP** Als je nog geen gebruiker hebt dan moet je zelf een nieuwe gebruiker aanmaken. Instructies vindt je op de [MariaDB Website](https://mariadb.com/kb/en/create-user/).
 
 ## Database instellingen opnemen
 Maak in de root van deze map met PHP-bestanden een nieuw bestand genaamd `database.settings`.
